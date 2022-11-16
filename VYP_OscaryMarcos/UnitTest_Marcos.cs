@@ -19,7 +19,8 @@ namespace VYP_OscaryMarcos
              * 
              * Los dos primeros digitos del codigo postal tienen que ir desde 01 hasta 52
              * Los codigos postales tienen que tener 5 digitos 
-             * Existen 3 excepciones que son 070, 071 y 080 que son codigos postales de 
+             * Existen 3 excepciones que son 070, 071 y 080 que son codigos postales de correspondencia de 
+             * Correos y Telégrafos, organismos oficiales, apartados y lista de correos
              * 
              **************************************************************************/
 

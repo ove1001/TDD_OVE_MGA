@@ -1,7 +1,7 @@
 namespace VYP_OscaryMarcos
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest1_Oscar
     {
         [TestInitialize]
         public void Init()

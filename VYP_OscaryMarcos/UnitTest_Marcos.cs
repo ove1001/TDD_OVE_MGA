@@ -15,6 +15,14 @@ namespace VYP_OscaryMarcos
             String codigoPostal = "09007";
             Assert.IsTrue(validador.EsCodigoPostal(codigoPostal));
 
+            /**************************************************************************
+             * 
+             * Los dos primeros digitos del codigo postal tienen que ir desde 01 hasta 52
+             * Los codigos postales tienen que tener 5 digitos 
+             * Existen 3 excepciones que son 070, 071 y 080 que son codigos postales de 
+             * 
+             **************************************************************************/
+
         }
 
         [TestMethod]

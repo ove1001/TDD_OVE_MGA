@@ -206,47 +206,69 @@ namespace VYP_OscaryMarcos
          *************************************************************************************/
         [DataTestMethod]
         [DataRow(new float[] {1.0f, 2.0f, 3.0f, 4.0f, 5.0f}, 3.0, DisplayName = "Media aritmética correcta")]
-        [DataRow(new float[] {1.0f, 2.0f, 3.0f, 4.0f, 4.0f}, 2.8, DisplayName = "CCC incorrecto (formato incorrecto)")]
-        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, float.NaN }, float.NaN, DisplayName = "CCC incorrecto (formato incorrecto)")]
+        [DataRow(new float[] {1.0f, 2.0f, 3.0f, 4.0f, 4.0f}, 2.8, DisplayName = "Media aritmética correcta")]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, float.NaN }, float.NaN, DisplayName = "Media aritmética correcta")]
         public void CalculeLaMediaAritmética(float[] datos, float previsto)
         {
-                Assert.AreEqual(previsto, estadistica.MediaAritmetica(datos));
+            Assert.AreEqual(previsto, estadistica.MediaAritmetica(datos));
         }
 
         [TestMethod]
-        public void CalculeLaMediaGeométrica()
+        [DataTestMethod]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f }, 2.6, DisplayName = "Media geométrica correcta")]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, 4.0f, 4.0f }, 2.4, DisplayName = "Media geométrica correcta")]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, float.NaN }, float.NaN, DisplayName = "Media geométrica correcta")]
+        public void CalculeLaMediaGeométrica(float[] datos, float previsto)
         {
-
+            Assert.AreEqual(previsto, estadistica.MediaGeometrica(datos));
         }
 
         [TestMethod]
-        public void CalculeLaMediaArmónica()
+        [DataTestMethod]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f }, 2.18, DisplayName = "Media armónica correcta")]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, 4.0f, 4.0f }, 2.14, DisplayName = "Media armónica correcta")]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, float.NaN }, float.NaN, DisplayName = "Media armónica correcta")]
+        public void CalculeLaMediaArmónica(float[] datos, float previsto)
         {
-
+            Assert.AreEqual(previsto, estadistica.MediaArmonica(datos));
         }
 
         [TestMethod]
-        public void CalculeLaMediana()
+        [DataTestMethod]
+        [DataRow(new float[] { 2.0f, 2.0f, 3.0f, 4.0f, 6.0f, 4.0f, 3.0f }, 3.0, DisplayName = "Mediana correcta")]
+        [DataRow(new float[] { 2.0f, 2.0f, 3.0f, 4.0f, 6.0f, 4.0f }, 3.5, DisplayName = "Mediana correcta")]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, float.NaN }, float.NaN, DisplayName = "Mediana correcta")]
+        public void CalculeLaMediana(float[] datos, float previsto)
         {
-
+            Assert.AreEqual(previsto, estadistica.Mediana(datos));
         }
 
         [TestMethod]
-        public void CalculeLaModa()
+        [DataTestMethod]
+        [DataRow(new float[] { 2.0f, 2.0f, 3.0f, 4.0f, 6.0f }, 2.0, DisplayName = "Moda correcta")]
+        [DataRow(new float[] { 2.0f, 2.0f, 3.0f, 4.0f, 6.0f, 4.0f }, float.NaN, DisplayName = "Moda correcta")]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, float.NaN }, float.NaN, DisplayName = "Moda correcta")]
+        public void CalculeLaModa(float[] datos, float previsto)
         {
-
+            Assert.AreEqual(previsto, estadistica.Moda(datos));
         }
 
         [TestMethod]
-        public void CalculaLaDesviaciónSinSignoOAbsoluta()
+        [DataTestMethod]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 5.0f, 3.0f, 5.0f, 5.0f, 6.0f, 4.0f, 3.0f, 2.0f, 4.0f, 5.0f, 7.0f, 8.0f, 4.0f, 5.0f, 5.0f, 4.0f, 12.0f, 12.0f, 12.0f, 31.0f, 5.0f, 3.0f, 26.0f, 3.0f, 748.0f, 4.0f, 63.0f, 2.0f, 1.0f, 41.0f, 5.0f, 26.0f, 3.0f }, 39.5, DisplayName = "Desviación Absoluta correcta")]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, float.NaN }, float.NaN, DisplayName = "Desviación Absoluta correcta")]
+        public void CalculaLaDesviaciónSinSignoOAbsoluta(float[] datos, float previsto)
         {
-
+            Assert.AreEqual(previsto, estadistica.DesviacionSinSingoOAbsoluta(datos));
         }
 
         [TestMethod]
-        public void CalculaLaDesviaciónMediaConSigno()
+        [DataTestMethod]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 5.0f, 3.0f, 5.0f, 5.0f, 6.0f, 4.0f, 3.0f, 2.0f, 4.0f, 5.0f, 7.0f, 8.0f, 4.0f, 5.0f, 5.0f, 4.0f, 12.0f, 12.0f, 12.0f, 31.0f, 5.0f, 3.0f, 26.0f, 3.0f, 748.0f, 4.0f, 63.0f, 2.0f, 1.0f, 41.0f, 5.0f, 26.0f, 3.0f }, 118.9, DisplayName = "Desviacion media con signo correcta")]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, float.NaN }, float.NaN, DisplayName = "Desviación media con signo correcta")]
+        public void CalculaLaDesviaciónMediaConSigno(float[] datos, float previsto)
         {
-
+            Assert.AreEqual(previsto, estadistica.DesviacionMediaConSigno(datos));
         }
     }
 }

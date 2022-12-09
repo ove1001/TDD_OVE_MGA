@@ -205,8 +205,8 @@ namespace VYP_OscaryMarcos
          * 
          *************************************************************************************/
         [DataTestMethod]
-        [DataRow( {1.0f, 2.0f, 3.0f, 4.0f, 5.0f}, 3, DisplayName = "Media aritmética correcta")]
-        [DataRow("1,2,3,4,4", 3, DisplayName = "CCC incorrecto (formato incorrecto)")]
+        [DataRow(new[] {1.0f, 2.0f, 3.0f, 4.0f, 5.0f}, 3, DisplayName = "Media aritmética correcta")]
+        [DataRow(new[] { 1.0f, 2.0f, 3.0f, 4.0f, 4.0f }, 3, DisplayName = "CCC incorrecto (formato incorrecto)")]
         [DataRow("2020-0000-11-22335", -1, DisplayName = "CCC incorrecto (longitud incorrecta")]
         [DataRow("2020-0000-11-22334455345465", -1, DisplayName = "CCC incorrecto (longitud incorrecta)")]
         [DataRow("2020-0000-11-qw334455", -1, DisplayName = "CCC incorrecto (formatio incorrecto)")]

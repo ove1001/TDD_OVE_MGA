@@ -17,30 +17,34 @@ namespace VYP_OscaryMarcos
             String codigoPostal = "09007";
             //Assert.IsTrue(validador.EsCodigoPostal(codigoPostal));
 
-            /**************************************************************************
-             * 
-             * Los dos primeros digitos del codigo postal tienen que ir desde 01 hasta 52
-             * Los codigos postales tienen que tener 5 digitos 
-             * Existen 3 excepciones que son 070, 071 y 080 que son codigos postales de 
-             * 
-             **************************************************************************/
+
 
         }
+
+        /**************************************************************************
+         * 
+         * La dirección de correo tiene que tener "usuario" seguido de "@" seguido de "dominio"
+         * 
+         **************************************************************************/
 
         [TestMethod]
         [DataTestMethod]
-        [DataRow("asd.fgh.es", -1, DisplayName = "EMail Incorrecto sin @")]
-        [DataRow("", -1, DisplayName = "EMail longitud 0")]
-        [DataRow("@asdfgh.es", -1, DisplayName = "EMail Incorrecto sin usuario")]
-        [DataRow("asd.asd@fgh.es", 1, DisplayName = "EMail Correcto")]
-        [DataRow("asd@fgh.es", 1, DisplayName = "EMail Correcto")]
 
+        [DataRow("", -1, DisplayName = "EMail longitud 0")]
+        [DataRow("hafs.jsdh.es", -1, DisplayName = "EMail Incorrecto sin @")]       
+        [DataRow("@djkfsk.es", -1, DisplayName = "EMail Incorrecto sin usuario")]
+        [DataRow("bfehjwe@", -1, DisplayName = "EMail Incorrecto sin dominio")]
+        [DataRow("bfehjwe@fjkhke", -1, DisplayName = "EMail Incorrecto con dominio incompleto")]
+        [DataRow("bfehjwe@.es", -1, DisplayName = "EMail Incorrecto con dominio incompleto")]
+        [DataRow("sfd.srgh@fgh.es", 0, DisplayName = "EMail Correcto")]
+        [DataRow("kjhhkj@iutt.es", 0, DisplayName = "EMail Correcto")]
         public void ValidaciónCorreoElectrónico(string eMail, int previsto)
         {
-            EmailAddressAttribute u1 = new EmailAddressAttribute();
-            if (previsto > 0) Assert.IsTrue(u1.IsValid(eMail));
-            else Assert.IsFalse(u1.IsValid(eMail));
+            Assert.AreEqual(previsto,validador.EsEmailValido(eMail));
         }
+
+
+
 
         [TestMethod]
         public void ValidaciónNIF()
@@ -48,6 +52,14 @@ namespace VYP_OscaryMarcos
 
         }
 
+        /**************************************************************************
+         * 
+         * El número de una tarjeta mastercard tiene que empezar por 222100-272099 o por 51-55
+         * El número de una tarjeta visa tiene que empezar por 4
+         * 
+         * Ambas tarjetas utilizan el algoritmo de Luhn para comprobar la validez del número de tarjeta
+         * 
+         **************************************************************************/
         [TestMethod]
         public void ValidaciónDeUnaTarjetaDeCrédito()
         {

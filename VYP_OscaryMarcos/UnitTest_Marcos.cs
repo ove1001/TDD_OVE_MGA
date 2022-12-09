@@ -193,9 +193,8 @@ namespace VYP_OscaryMarcos
         * 
         * METODOS DE CALCULOS
         * 
-        * El formato introducido debe de ser del tipo ([0-9][,])+.
-        * Es decir, se introduciran digitos separados por comas 1 o mas veces.
-        * El formato de los digitos tendra que ser floats
+        * El formato introducido debe de ser un array de floats.
+        * El segundo dato previsto es un float.
         * Este formato se aplicara para todos los metodos de calculos 
         * 
         **************************************************************************/

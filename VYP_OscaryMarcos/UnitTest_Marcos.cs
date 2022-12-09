@@ -11,16 +11,16 @@ namespace VYP_OscaryMarcos
             Validador validador = new Validador();
         }
 
-             /**************************************************************************
-             * 
-             * METODO DE PRUEBA PARA EL CÓDIGO POSTAL.
-             * 
-             * Los dos primeros digitos del codigo postal tienen que ir desde 01 hasta 52
-             * Los codigos postales tienen que tener 5 digitos 
-             * Existen 3 excepciones que son 070, 071 y 080 que son codigos postales de correspondencia de 
-             * Correos y Telégrafos, organismos oficiales, apartados y lista de correos
-             * 
-             **************************************************************************/
+        /**************************************************************************
+        * 
+        * METODO DE PRUEBA PARA EL CÓDIGO POSTAL.
+        * 
+        * Los dos primeros digitos del codigo postal tienen que ir desde 01 hasta 52
+        * Los codigos postales tienen que tener 5 digitos 
+        * Existen 3 excepciones que son 070, 071 y 080 que son codigos postales de correspondencia de 
+        * Correos y Telégrafos, organismos oficiales, apartados y lista de correos
+        * 
+        **************************************************************************/
 
         [TestMethod]
         [DataTestMethod]
@@ -31,10 +31,7 @@ namespace VYP_OscaryMarcos
         [DataRow("090074", -1, DisplayName = "Longitud Codigo Postal Erroneo (Sobran digitos)")]
         public void ValidacióCódigoPostal(string CodigoPostal, int previsto)
         {
-
-            if (previsto == 0) Assert.IsTrue(validador.EsCodigoPostal(CodigoPostal));
-            else Assert.IsFalse(validador.EsCodigoPostal(CodigoPostal));
-
+            Assert.AreEqual(previsto, validador.EsCodigoPostal(CodigoPostal));
         }
 
         /**************************************************************************
@@ -50,16 +47,17 @@ namespace VYP_OscaryMarcos
         **************************************************************************/
         [TestMethod]
         [DataTestMethod]
-        [DataRow("prueba@prueba.com", 0, DisplayName = "Email correcto")]
-        [DataRow("12prueba@prueba.com", -1, DisplayName = "Email incorrecto (formato incorrecto)")]
-        [DataRow("pruebaprueba.com", -1, DisplayName = "Email incorrecto (no se identifica como correo)")]
-        [DataRow("prueba@prueba", -1, DisplayName = "Email incorrecto (falta dominio)")]
-        [DataRow("prueba@.com", -1, DisplayName = "Email incorrecto (formato incorrecto)")]
-        //[DataRow("prueba@12prueba.com", -1, DisplayName = "Email incorrecto (formato incorrecto)")]
+        [DataRow("", -1, DisplayName = "EMail longitud 0")]
+        [DataRow("hafs.jsdh.es", -1, DisplayName = "EMail Incorrecto sin @")]
+        [DataRow("@djkfsk.es", -1, DisplayName = "EMail Incorrecto sin usuario")]
+        [DataRow("bfehjwe@", -1, DisplayName = "EMail Incorrecto sin dominio")]
+        [DataRow("bfehjwe@fjkhke", -1, DisplayName = "EMail Incorrecto con dominio incompleto")]
+        [DataRow("bfehjwe@.es", -1, DisplayName = "EMail Incorrecto con dominio incompleto")]
+        [DataRow("sfd.srgh@fgh.es", 0, DisplayName = "EMail Correcto")]
+        [DataRow("kjhhkj@iutt.es", 0, DisplayName = "EMail Correcto")]
         public void ValidaciónCorreoElectrónico(string email, int previsto)
         {
-            if (previsto == 0) Assert.IsTrue(validador.EsEmailValido(email));
-            else Assert.IsFalse(validador.EsEmailValido(email));
+            Assert.AreEqual(previsto, validador.EsEmailValido(eMail));
         }
 
         /**************************************************************************
@@ -109,21 +107,20 @@ namespace VYP_OscaryMarcos
 
         public void ValidaciónNIF(string nif, int previsto)
         {
-            if (previsto == 0) Assert.IsTrue(validador.EsNIF(nif));
-            else Assert.IsFalse(validador.EsNIF(nif));
+            Assert.AreEqual(previsto, validador.EsNIF(nif));
         }
 
-       /**************************************************************************
-       * 
-       * METODO DE PRUEBA PARA LA TARJETA DE CREDITO (VISA, MASTERCARD).
-       * 
-       * Las tarjetas MASTERCARD pueden empezar por [54] o [55]
-       * Las tarjetas MASTERCARD pueden empezar por 2 siendo el rango de digitos entre (222100 a 272099)
-       * Las tarjetas MASTERCARD tienen que tener una longitud de 16 digitos obligatoriamente
-       * Las tarjetas VSIA deben de empezar por [4]
-       * Las tarjetas VISA pueden ser de 13 digitos o de 16 digitos
-       * 
-       **************************************************************************/
+        /**************************************************************************
+        * 
+        * METODO DE PRUEBA PARA LA TARJETA DE CREDITO (VISA, MASTERCARD).
+        * 
+        * Las tarjetas MASTERCARD pueden empezar por [54] o [55]
+        * Las tarjetas MASTERCARD pueden empezar por 2 siendo el rango de digitos entre (222100 a 272099)
+        * Las tarjetas MASTERCARD tienen que tener una longitud de 16 digitos obligatoriamente
+        * Las tarjetas VSIA deben de empezar por [4]
+        * Las tarjetas VISA pueden ser de 13 digitos o de 16 digitos
+        * 
+        **************************************************************************/
 
         [TestMethod]
         [DataTestMethod]
@@ -165,10 +162,9 @@ namespace VYP_OscaryMarcos
         [DataRow("3466 2100 0418 4012 3456 7891", -1, DisplayName = "IBAN incorrecto (no se identifica con ningun pais)")]
         [DataRow("ES66 2100 0418 AS12 3456 7891", -1, DisplayName = "IBAN incorrecto (formato incorrecto)")]
         [DataRow("ES6621000418AS1234567891", -1, DisplayName = "IBAN incorrecto (formato incorrecto)")]
-        public void ValidaciónDeUnIBANEspañol(string ibanespañol, int previsto)
+        public void ValidaciónDeUnIBANEspañol(string ibanespanol, int previsto)
         {
-            if (previsto == 0) Assert.IsTrue(validador.EsIBANEspañol(ibanespañol));
-            else Assert.IsFalse(validador.EsIBANEspañol(ibanespañol));
+            Assert.AreEqual(previsto, validador.EsIBANEspanol(ibanespanol));
         }
 
         /**************************************************************************
@@ -190,8 +186,7 @@ namespace VYP_OscaryMarcos
         [DataRow("2020-0000-11-qw334455", -1, DisplayName = "CCC incorrecto (formatio incorrecto)")]
         public void ValidaciónDeUnCCCBancario(string cccbancario, int previsto)
         {
-            if (previsto == 0) Assert.IsTrue(validador.EsCCCBancario(cccbancario));
-            else Assert.IsFalse(validador.EsCCCBancario(cccbancario));
+            Assert.AreEqual(previsto, validador.EsCCCBancario(cccbancario));
         }
 
         /**************************************************************************
@@ -210,14 +205,14 @@ namespace VYP_OscaryMarcos
          * 
          *************************************************************************************/
         [DataTestMethod]
-        [DataRow("1,2,3,4,5", 3, DisplayName = "Media aritmética correcta")]
+        [DataRow( {1.0f, 2.0f, 3.0f, 4.0f, 5.0f}, 3, DisplayName = "Media aritmética correcta")]
         [DataRow("1,2,3,4,4", 3, DisplayName = "CCC incorrecto (formato incorrecto)")]
         [DataRow("2020-0000-11-22335", -1, DisplayName = "CCC incorrecto (longitud incorrecta")]
         [DataRow("2020-0000-11-22334455345465", -1, DisplayName = "CCC incorrecto (longitud incorrecta)")]
         [DataRow("2020-0000-11-qw334455", -1, DisplayName = "CCC incorrecto (formatio incorrecto)")]
-        public void CalculeLaMediaAritmética(string digitos, int previsto)
+        public void CalculeLaMediaAritmética(List<float> datos, int previsto)
         {
-
+            Assert.AreEqual(previsto, estadistica.MediaAritmetica(datos));
         }
 
         [TestMethod]

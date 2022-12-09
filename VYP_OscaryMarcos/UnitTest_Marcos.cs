@@ -191,19 +191,16 @@ namespace VYP_OscaryMarcos
 
         /**************************************************************************
         * 
-        * METODO DE PRUEBA PARA LA MEDIA ARITMÉTICA DE DIGITOS.
+        * METODOS DE CALCULOS
         * 
         * El formato introducido debe de ser del tipo ([0-9][,])+.
         * Es decir, se introduciran digitos separados por comas 1 o mas veces.
+        * El formato de los digitos tendra que ser floats
+        * Este formato se aplicara para todos los metodos de calculos 
         * 
         **************************************************************************/
 
         [TestMethod]
-        /**************************************************************************************
-         * 
-         * IMAGINO QUE SE TENDRA QUE INICIALIZAR UNA LISTA CON DIGITOS
-         * 
-         *************************************************************************************/
         [DataTestMethod]
         [DataRow(new float[] {1.0f, 2.0f, 3.0f, 4.0f, 5.0f}, 3.0, DisplayName = "Media aritmética correcta")]
         [DataRow(new float[] {1.0f, 2.0f, 3.0f, 4.0f, 4.0f}, 2.8, DisplayName = "Media aritmética correcta")]

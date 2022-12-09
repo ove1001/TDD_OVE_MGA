@@ -205,14 +205,12 @@ namespace VYP_OscaryMarcos
          * 
          *************************************************************************************/
         [DataTestMethod]
-        [DataRow(new[] {1.0f, 2.0f, 3.0f, 4.0f, 5.0f}, 3, DisplayName = "Media aritmética correcta")]
-        [DataRow(new[] { 1.0f, 2.0f, 3.0f, 4.0f, 4.0f }, 3, DisplayName = "CCC incorrecto (formato incorrecto)")]
-        [DataRow("2020-0000-11-22335", -1, DisplayName = "CCC incorrecto (longitud incorrecta")]
-        [DataRow("2020-0000-11-22334455345465", -1, DisplayName = "CCC incorrecto (longitud incorrecta)")]
-        [DataRow("2020-0000-11-qw334455", -1, DisplayName = "CCC incorrecto (formatio incorrecto)")]
-        public void CalculeLaMediaAritmética(List<float> datos, int previsto)
+        [DataRow(new float[] {1.0f, 2.0f, 3.0f, 4.0f, 5.0f}, 3.0, DisplayName = "Media aritmética correcta")]
+        [DataRow(new float[] {1.0f, 2.0f, 3.0f, 4.0f, 4.0f}, 2.8, DisplayName = "CCC incorrecto (formato incorrecto)")]
+        [DataRow(new float[] { 1.0f, 2.0f, 3.0f, float.NaN }, float.NaN, DisplayName = "CCC incorrecto (formato incorrecto)")]
+        public void CalculeLaMediaAritmética(float[] datos, float previsto)
         {
-            Assert.AreEqual(previsto, estadistica.MediaAritmetica(datos));
+                Assert.AreEqual(previsto, estadistica.MediaAritmetica(datos));
         }
 
         [TestMethod]

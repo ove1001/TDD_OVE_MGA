@@ -61,7 +61,7 @@ namespace VYP_OscaryMarcos
         [DataRow("bfehjwe@fjkhke", -1, DisplayName = "EMail Incorrecto con dominio incompleto")]
         [DataRow("bfehjwe@.es", -1, DisplayName = "EMail Incorrecto con dominio incompleto")]
         [DataRow("sfd_srgh@fgh.es", 0, DisplayName = "EMail Correcto")]
-        [DataRow("kjhhkj@iutt.es", 0, DisplayName = "EMail Correcto 2")]
+        [DataRow("kjhhkj@iutt.ubu.es", 0, DisplayName = "EMail Correcto 2")]
         public void ValidaciónCorreoElectrónico(string eMail, int previsto)
         {
             Assert.AreEqual(previsto, validador.EsEmailValido(eMail));
@@ -127,10 +127,10 @@ namespace VYP_OscaryMarcos
         [DataTestMethod]
         [DataRow("4008 9466 9185 3566", 0, DisplayName = "Tarjeta de Credito Correcta (TIPO VISA)")]
         [DataRow("5112 3162 8908 4398", 0, DisplayName = "Tarjeta de Credito Correcta (TIPO MASTERCAD) (test 1)")]       
-        [DataRow("5478 9827 7625 7850", 0, DisplayName = "Tarjeta de Credito incorrecta (TIPO MASTERCAD) (test 2)")]
-        [DataRow("5578 9827 7625 7859", 0, DisplayName = "Tarjeta de Credito incorrecta (TIPO MASTERCAD) (test 3)")]
-        [DataRow("2221 1103 0418 4019", 0, DisplayName = "Tarjeta de Credito incorrecta (TIPO MASTERCAD) (test 4)")]
-        [DataRow("2720 9903 0418 4012", -1, DisplayName = "Tarjeta de Credito incorrecta (TIPO MASTERCAD) (test 5)")]
+        [DataRow("5478 9827 7625 7850", 0, DisplayName = "Tarjeta de Credito Correcta (TIPO MASTERCAD) (test 2)")]
+        [DataRow("5578 9827 7625 7859", 0, DisplayName = "Tarjeta de Credito Correcta (TIPO MASTERCAD) (test 3)")]
+        [DataRow("2221 1103 0418 4019", 0, DisplayName = "Tarjeta de Credito Correcta (TIPO MASTERCAD) (test 4)")]
+        [DataRow("2720 9903 0418 4012", -1, DisplayName = "Tarjeta de Credito Correcta (TIPO MASTERCAD) (test 5)")]
         [DataRow("5478 9827 7625 7859 5433", -1, DisplayName = "Tarjeta de Credito Incorrecta (longitud incorrecta)")]
         [DataRow("5478 9827", -1, DisplayName = "Tarjeta de Credito Incorrecta (longitud incorrecta)")]
         [DataRow("AS78 9827 7625 7859", -1, DisplayName = "Tarjeta de Credito Incorrecta (formato incorrecto)")]

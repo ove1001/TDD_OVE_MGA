@@ -10,7 +10,7 @@ namespace UBUClases
             string patron = "^[0-9]{5}$";
             if (Regex.IsMatch(codigo_postal, patron))
             {
-                string path_archivo = "codigos_postales.csv";
+                string path_archivo = "..\\..\\..\\..\\UBUClases\\codigos_postales.csv";
                 System.IO.StreamReader archivo = new System.IO.StreamReader(path_archivo);
                 string separador = ",";
                 string linea;
@@ -37,6 +37,7 @@ namespace UBUClases
             string patron = usuario + host + dominio;
             if (Regex.IsMatch(eMail, patron))
             {
+                Console.WriteLine(eMail);
                 string path_archivo = "..\\..\\..\\..\\UBUClases\\dominios_internet.csv";
                 System.IO.StreamReader archivo = new System.IO.StreamReader(path_archivo);
                 string separador = ",";
@@ -47,7 +48,13 @@ namespace UBUClases
                 {
                     dominios_validos.Add(linea.Split(separador)[0]);
                 }
-                string dominio_email = Regex.Split(eMail, patron)[0];
+                string[] partes_dominio_email = eMail.Split(".");
+                string dominio_email = "";
+                for (int i = 1; i<partes_dominio_email.Length; i++)
+                {
+                    dominio_email = dominio_email+"."+partes_dominio_email[i];
+                    Console.WriteLine("." + partes_dominio_email[i]);
+                }
                 if (dominios_validos.Contains(dominio_email))
 			        resultado = 0;
             }
@@ -140,8 +147,7 @@ namespace UBUClases
                         calculo += digito;
                     }
                     calculo *= 9;
-                    int digito_control = int.Parse(cuenta.Substring(cuenta.Length - 1, 1));
-                    Console.WriteLine(calculo % 10);
+                    int digito_control = int.Parse(cuenta.Substring(cuenta.Length - 1, 1));                   
                     if (calculo % 10 == digito_control)
                         resultado = 0;
                 }

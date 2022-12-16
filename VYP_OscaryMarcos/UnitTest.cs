@@ -6,7 +6,7 @@ using UBUClases;
 namespace VYP_OscaryMarcos
 {
     [TestClass]
-    public class UnitTest1_Oscar
+    public class UnitTest
     {
         Validador validador = new Validador();
         Estadistica estadistica = new Estadistica();
@@ -61,7 +61,7 @@ namespace VYP_OscaryMarcos
         [DataRow("bfehjwe@fjkhke", -1, DisplayName = "EMail Incorrecto con dominio incompleto")]
         [DataRow("bfehjwe@.es", -1, DisplayName = "EMail Incorrecto con dominio incompleto")]
         [DataRow("sfd_srgh@fgh.es", 0, DisplayName = "EMail Correcto")]
-        [DataRow("kjhhkj@iutt.ubu.es", 0, DisplayName = "EMail Correcto 2")]
+        [DataRow("kjhhkj@iutt.com.es", 0, DisplayName = "EMail Correcto 2")]
         public void ValidaciónCorreoElectrónico(string eMail, int previsto)
         {
             Assert.AreEqual(previsto, validador.EsEmailValido(eMail));
@@ -142,6 +142,30 @@ namespace VYP_OscaryMarcos
         }
 
         /**************************************************************************
+       * 
+       * METODO DE PRUEBA PARA EL CCC BANCARIO.
+       * 
+       * El CCC bancario de ser de la forma ([0-9]{4}[-]{1}){2}[0-9]{2}[-]{1}[0-9]{10}.
+       * Esto se traduce en: 4 digitos iniciales seguidos de un - 2 veces
+       * 2 digitos seguidos de - 1 vez
+       * 10 digitos
+       * 
+       **************************************************************************/
+        [TestMethod]
+        [DataTestMethod]
+        [DataRow("00789684042474678719", 0, DisplayName = "CCC correcto")]
+        [DataRow("2103-2885-28-7531379877", 0, DisplayName = "CCC correcto con guiones")]
+        [DataRow("0011 2400 54 3450567542", 0, DisplayName = "CCC correcto con espaciow")]
+        [DataRow("20200000-11-2233445566", -1, DisplayName = "CCC incorrecto (formato incorrecto)")]
+        [DataRow("2020-0000-11-22335", -1, DisplayName = "CCC incorrecto (longitud incorrecta")]
+        [DataRow("2020-0000-11-22334455345465", -1, DisplayName = "CCC incorrecto (longitud incorrecta) 2")]
+        [DataRow("2020-0000-11-qw33445566", -1, DisplayName = "CCC incorrecto (formato incorrecto) 2")]
+        public void ValidaciónDeUnCCCBancario(string cccbancario, int previsto)
+        {
+            Assert.AreEqual(previsto, validador.EsCCCBancario(cccbancario));
+        }
+
+        /**************************************************************************
         * 
         * METODO DE PRUEBA PARA EL IBAN ESPAÑOL.
         * 
@@ -153,43 +177,24 @@ namespace VYP_OscaryMarcos
         * 
         **************************************************************************/
 
-        //[TestMethod]
-        //[DataTestMethod]
-        //[DataRow("ES66 2100 0418 4012 3456 7891", 0, DisplayName = "IBAN Español correcto")]
-        //[DataRow("ES66 2100 0418 4012 3456", -1, DisplayName = "IBAN incorrecto (longitud incorrecta)")]
-        //[DataRow("ES66 2100 0418 4012 3456 7891 5684", -1, DisplayName = "IBAN incorrecto (longitud incorrecta")]
-        //[DataRow("ET66 2100 0418 4012 3456 7891", -1, DisplayName = "IBAN incorrecto (no es español)")]
-        //[DataRow("3466 2100 0418 4012 3456 7891", -1, DisplayName = "IBAN incorrecto (no se identifica con ningun pais)")]
-        //[DataRow("ES66 2100 0418 AS12 3456 7891", -1, DisplayName = "IBAN incorrecto (formato incorrecto)")]
-        //[DataRow("ES6621000418AS1234567891", -1, DisplayName = "IBAN incorrecto (formato incorrecto)")]
-        //public void ValidaciónDeUnIBANEspañol(string ibanespanol, int previsto)
-        //{
-        //    Assert.AreEqual(previsto, validador.EsIBANEspanol(ibanespanol));
-        //}
-
-        /**************************************************************************
-        * 
-        * METODO DE PRUEBA PARA EL CCC BANCARIO.
-        * 
-        * El CCC bancario de ser de la forma ([0-9]{4}[-]{1}){2}[0-9]{2}[-]{1}[0-9]{10}.
-        * Esto se traduce en: 4 digitos iniciales seguidos de un - 2 veces
-        * 2 digitos seguidos de - 1 vez
-        * 10 digitos
-        * 
-        **************************************************************************/
         [TestMethod]
         [DataTestMethod]
-        [DataRow("00789684042474678719", 0, DisplayName = "CCC Español correcto")]
-        [DataRow("2103-2885-28-7531379877", 0, DisplayName = "CCC Español correcto con guiones")]
-        [DataRow("0011 2400 54 3450567542", 0, DisplayName = "CCC Español correcto con espaciow")]
-        [DataRow("20200000-11-2233445566", -1, DisplayName = "CCC incorrecto (formato incorrecto)")]
-        [DataRow("2020-0000-11-22335", -1, DisplayName = "CCC incorrecto (longitud incorrecta")]
-        [DataRow("2020-0000-11-22334455345465", -1, DisplayName = "CCC incorrecto (longitud incorrecta) 2")]
-        [DataRow("2020-0000-11-qw33445566", -1, DisplayName = "CCC incorrecto (formato incorrecto) 2")]
-        public void ValidaciónDeUnCCCBancario(string cccbancario, int previsto)
+        [DataRow("ES6600789684042474678719", 0, DisplayName = "IBAN Español correcto")]
+        [DataRow("ES66-2103-2885-28-7531379877", 0, DisplayName = "IBAN Español correcto con guiones")]
+        [DataRow("ES66 0011 2400 54 3450567542", 0, DisplayName = "IBAN Español correcto con espaciow")]
+        [DataRow("ES66 2100 0418 4012 3456 7891", 0, DisplayName = "IBAN Español correcto")]
+        [DataRow("ES66 2100 0418 4012 3456", -1, DisplayName = "IBAN incorrecto (longitud incorrecta)")]
+        [DataRow("ES66 2100 0418 4012 3456 7891 5684", -1, DisplayName = "IBAN incorrecto (longitud incorrecta")]
+        [DataRow("ET66 2100 0418 4012 3456 7891", -1, DisplayName = "IBAN incorrecto (no es español)")]
+        [DataRow("3466 2100 0418 4012 3456 7891", -1, DisplayName = "IBAN incorrecto (no se identifica con ningun pais)")]
+        [DataRow("ES66 2100 0418 AS12 3456 7891", -1, DisplayName = "IBAN incorrecto (formato incorrecto)")]
+        [DataRow("ES6621000418AS1234567891", -1, DisplayName = "IBAN incorrecto (formato incorrecto)")]
+        public void ValidaciónDeUnIBANEspañol(string ibanespanol, int previsto)
         {
-            Assert.AreEqual(previsto, validador.EsCCCBancario(cccbancario));
+            Assert.AreEqual(previsto, validador.EsIBANEspanol(ibanespanol));
         }
+
+       
 
         /**************************************************************************
         * 

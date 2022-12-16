@@ -37,7 +37,6 @@ namespace UBUClases
             string patron = usuario + host + dominio;
             if (Regex.IsMatch(eMail, patron))
             {
-                Console.WriteLine(eMail);
                 string path_archivo = "..\\..\\..\\..\\UBUClases\\dominios_internet.csv";
                 System.IO.StreamReader archivo = new System.IO.StreamReader(path_archivo);
                 string separador = ",";
@@ -53,7 +52,6 @@ namespace UBUClases
                 for (int i = 1; i<partes_dominio_email.Length; i++)
                 {
                     dominio_email = dominio_email+"."+partes_dominio_email[i];
-                    Console.WriteLine("." + partes_dominio_email[i]);
                 }
                 if (dominios_validos.Contains(dominio_email))
 			        resultado = 0;
@@ -190,5 +188,18 @@ namespace UBUClases
             return calculo;
         }
 
+        public int EsIBANEspanol(string IVAN)
+        {
+            int resultado = -1;
+            string patron_IVAN = "^" + "ES[0-9]{2}[- ]?[0-9]{4}[- ]?[0-9]{4}[- ]?[0-9]{2}[- ]?[0-9]{10}" + "$";
+            if (Regex.IsMatch(IVAN, patron_IVAN))
+            {
+                string ivan = IVAN.Replace(" ", "");
+                ivan = ivan.Replace("-", "");
+                string ccc = ivan.Substring(4);
+                resultado = EsCCCBancario(ccc);
+            }
+            return resultado;
+        }
     }
 }

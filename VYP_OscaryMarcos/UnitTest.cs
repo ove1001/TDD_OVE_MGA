@@ -15,7 +15,7 @@ namespace VYP_OscaryMarcos
         [TestInitialize]
         public void Init()
         {
-            
+
         }
 
         /**************************************************************************
@@ -36,6 +36,8 @@ namespace VYP_OscaryMarcos
         [DataRow("900107", -1, DisplayName = "Codigo Postal Incorrecto (No existe el inicio del codigo)")]
         [DataRow("09a7", -1, DisplayName = "Codigo Postal Incorrecto (Contiene una o mas letras)")]
         [DataRow("090074", -1, DisplayName = "Longitud Codigo Postal Erroneo (Sobran digitos)")]
+        [DataRow("", -1, DisplayName = "Codigo postal incorrecto (vacio)")]
+        [DataRow(null, -1, DisplayName = "Codigo postal incorrecto (nulo)")]
         public void ValidacióCódigoPostal(string CodigoPostal, int previsto)
         {
             Assert.AreEqual(previsto, validador.EsCodigoPostal(CodigoPostal));
@@ -62,6 +64,8 @@ namespace VYP_OscaryMarcos
         [DataRow("bfehjwe@.es", -1, DisplayName = "EMail Incorrecto con dominio incompleto")]
         [DataRow("sfd_srgh@fgh.es", 0, DisplayName = "EMail Correcto")]
         [DataRow("kjhhkj@iutt.com.es", 0, DisplayName = "EMail Correcto 2")]
+        [DataRow("", -1, DisplayName = "EMail incorrecto (vacio)")]
+        [DataRow(null, -1, DisplayName = "EMail incorrecto (nulo)")]
         public void ValidaciónCorreoElectrónico(string eMail, int previsto)
         {
             Assert.AreEqual(previsto, validador.EsEmailValido(eMail));
@@ -105,6 +109,8 @@ namespace VYP_OscaryMarcos
         [DataRow("L4462976A", -1, DisplayName = "NIF InCorrecto (Tipo L)")]
         [DataRow("M7439875S", -1, DisplayName = "NIF InCorrecto (Tipo M)")]
         [DataRow("09873F", -1, DisplayName = "DNI InCorrecto (Longitud Incorrecta)")]
+        [DataRow("", -1, DisplayName = "DNI incorrecto (vacio)")]
+        [DataRow(null, -1, DisplayName = "DNI incorrecto (nulo)")]
 
         public void ValidaciónNIF(string nif, int previsto)
         {
@@ -126,7 +132,7 @@ namespace VYP_OscaryMarcos
         [TestMethod]
         [DataTestMethod]
         [DataRow("4008 9466 9185 3566", 0, DisplayName = "Tarjeta de Credito Correcta (TIPO VISA)")]
-        [DataRow("5112 3162 8908 4398", 0, DisplayName = "Tarjeta de Credito Correcta (TIPO MASTERCAD) (test 1)")]       
+        [DataRow("5112 3162 8908 4398", 0, DisplayName = "Tarjeta de Credito Correcta (TIPO MASTERCAD) (test 1)")]
         [DataRow("5478 9827 7625 7850", 0, DisplayName = "Tarjeta de Credito Correcta (TIPO MASTERCAD) (test 2)")]
         [DataRow("5578 9827 7625 7859", 0, DisplayName = "Tarjeta de Credito Correcta (TIPO MASTERCAD) (test 3)")]
         [DataRow("2221 1103 0418 4019", 0, DisplayName = "Tarjeta de Credito Correcta (TIPO MASTERCAD) (test 4)")]
@@ -135,6 +141,8 @@ namespace VYP_OscaryMarcos
         [DataRow("5478 9827", -1, DisplayName = "Tarjeta de Credito Incorrecta (longitud incorrecta)")]
         [DataRow("AS78 9827 7625 7859", -1, DisplayName = "Tarjeta de Credito Incorrecta (formato incorrecto)")]
         [DataRow("6778 9827 7625 7859", -1, DisplayName = "Tarjeta de Credito Incorrecta (no se reconoce ni como VISA ni como MASTERCAD)")]
+        [DataRow("", -1, DisplayName = "Tarjeta de credito incorrecta (vacio)")]
+        [DataRow(null, -1, DisplayName = "Tarjeta de credito incorrecta (nulo)")]
 
         public void ValidaciónDeUnaTarjetaDeCrédito(string tarjetaCredito, int previsto)
         {
@@ -160,6 +168,8 @@ namespace VYP_OscaryMarcos
         [DataRow("2020-0000-11-22335", -1, DisplayName = "CCC incorrecto (longitud incorrecta")]
         [DataRow("2020-0000-11-22334455345465", -1, DisplayName = "CCC incorrecto (longitud incorrecta) 2")]
         [DataRow("2020-0000-11-qw33445566", -1, DisplayName = "CCC incorrecto (formato incorrecto) 2")]
+        [DataRow("", -1, DisplayName = "CCC incorrecto (vacio)")]
+        [DataRow(null, -1, DisplayName = "CCC incorrecto (nulo)")]
         public void ValidaciónDeUnCCCBancario(string cccbancario, int previsto)
         {
             Assert.AreEqual(previsto, validador.EsCCCBancario(cccbancario));
@@ -189,12 +199,13 @@ namespace VYP_OscaryMarcos
         [DataRow("3466 2100 0418 4012 3456 7891", -1, DisplayName = "IBAN incorrecto (no se identifica con ningun pais)")]
         [DataRow("ES66 2100 0418 AS12 3456 7891", -1, DisplayName = "IBAN incorrecto (formato incorrecto)")]
         [DataRow("ES6621000418AS1234567891", -1, DisplayName = "IBAN incorrecto (formato incorrecto)")]
+        [DataRow("", -1, DisplayName = "IBAN incorrecto (vacio)")]
+        [DataRow(null, -1, DisplayName = "IBAN incorrecto (nulo)")]
         public void ValidaciónDeUnIBANEspañol(string ibanespanol, int previsto)
         {
             Assert.AreEqual(previsto, validador.EsIBANEspanol(ibanespanol));
         }
 
-       
 
         /**************************************************************************
         * 
@@ -212,9 +223,11 @@ namespace VYP_OscaryMarcos
         [DataRow(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0 }, 3.0, DisplayName = "Media aritmética correcta (test 1)")]
         [DataRow(new double[] { 1.0, 2.0, 3.0, 4.0, 4.0 }, 2.8, DisplayName = "Media aritmética correcta (test 2)")]
         [DataRow(new double[] { 1.0, 2.0, 3.0, double.NaN }, double.NaN, DisplayName = "Media aritmética correcta")]
+        [DataRow(new double[] { }, double.NaN, DisplayName = "Media aritmética sin datos de entrada")]
+        [DataRow(null, double.NaN, DisplayName = "Media aritmética con datos de entrada nulos")]
         public void CalculeLaMediaAritmética(double[] datos, double previsto)
         {
-            Assert.AreEqual(previsto, Math.Round(estadistica.MediaAritmetica(datos),2));
+            Assert.AreEqual(previsto, Math.Round(estadistica.MediaAritmetica(datos), 2));
         }
 
         [TestMethod]
@@ -222,9 +235,11 @@ namespace VYP_OscaryMarcos
         [DataRow(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0 }, 2.61, DisplayName = "Media geométrica correcta (test 1)")]
         [DataRow(new double[] { 1.0, 2.0, 3.0, 4.0, 4.0 }, 2.49, DisplayName = "Media geométrica correcta (test 2)")]
         [DataRow(new double[] { 1.0, 2.0, 3.0, double.NaN }, double.NaN, DisplayName = "Media geométrica correcta")]
+        [DataRow(new double[] { }, double.NaN, DisplayName = "Media geométrica sin datos de entrada")]
+        [DataRow(null, double.NaN, DisplayName = "Media geométrica con datos de entrada nulos")]
         public void CalculeLaMediaGeométrica(double[] datos, double previsto)
         {
-            Assert.AreEqual(previsto, Math.Round(estadistica.MediaGeometrica(datos),2));
+            Assert.AreEqual(previsto, Math.Round(estadistica.MediaGeometrica(datos), 2));
         }
 
         [TestMethod]
@@ -232,9 +247,11 @@ namespace VYP_OscaryMarcos
         [DataRow(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0 }, 2.19, DisplayName = "Media armónica correcta (test 1)")]
         [DataRow(new double[] { 1.0, 2.0, 3.0, 4.0, 4.0 }, 2.14, DisplayName = "Media armónica correcta (test 2)")]
         [DataRow(new double[] { 1.0, 2.0, 3.0, double.NaN }, double.NaN, DisplayName = "Media armónica incalculable por contener NaN")]
+        [DataRow(new double[] { }, double.NaN, DisplayName = "Media armónica sin datos de entrada")]
+        [DataRow(null, double.NaN, DisplayName = "Media armónica con datos de entrada nulos")]
         public void CalculeLaMediaArmónica(double[] datos, double previsto)
         {
-            Assert.AreEqual(previsto, Math.Round(estadistica.MediaArmonica(datos),2));
+            Assert.AreEqual(previsto, Math.Round(estadistica.MediaArmonica(datos), 2));
         }
 
         [TestMethod]
@@ -242,9 +259,11 @@ namespace VYP_OscaryMarcos
         [DataRow(new double[] { 2.0, 2.0, 3.0, 4.0, 6.0, 4.0, 3.0 }, 3.0, DisplayName = "Mediana correcta: Cantidad de datos pares")]
         [DataRow(new double[] { 2.0, 2.0, 3.0, 4.0, 6.0, 4.0 }, 3.5, DisplayName = "Mediana correcta: Cantidad de datos impares")]
         [DataRow(new double[] { 1.0, 2.0, 3.0, double.NaN }, double.NaN, DisplayName = "Mediana incalculable por contener NaN")]
+        [DataRow(new double[] { }, double.NaN, DisplayName = "Mediana sin datos de entrada")]
+        [DataRow(null, double.NaN, DisplayName = "Mediana con datos de entrada nulos")]
         public void CalculeLaMediana(double[] datos, double previsto)
         {
-            Assert.AreEqual(previsto, Math.Round(estadistica.Mediana(datos),2));
+            Assert.AreEqual(previsto, Math.Round(estadistica.Mediana(datos), 2));
         }
 
         [TestMethod]
@@ -252,6 +271,8 @@ namespace VYP_OscaryMarcos
         [DataRow(new double[] { 2.0, 2.0, 3.0, 4.0, 6.0 }, new double[] { 2.0 }, DisplayName = "Moda correcta: 1 moda")]
         [DataRow(new double[] { 2.0, 2.0, 3.0, 4.0, 6.0, 4.0 }, new double[] { 2.0, 4.0 }, DisplayName = "Moda correcta: 2 modas")]
         [DataRow(new double[] { 1.0, 2.0, 3.0, double.NaN }, new double[] { double.NaN }, DisplayName = "Moda incalculable por contener NaN")]
+        [DataRow(new double[] { }, new double[] { double.NaN }, DisplayName = "Moda sin datos de entrada")]
+        [DataRow(null, new double[] { double.NaN }, DisplayName = "Moda con datos de entrada nulos")]
         public void CalculeLaModa(double[] datos, double[] previsto)
         {
             double[] resultado = estadistica.Moda(datos);
@@ -263,6 +284,8 @@ namespace VYP_OscaryMarcos
         [DataTestMethod]
         [DataRow(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 5.0}, new double[] { 2.71, 1.71, 0.71, 0.29, 1.29, 2.29, 1.29 }, DisplayName = "Desviación sin signo o Absoluta correcta")]
         [DataRow(new double[] { 1.0, 2.0, 3.0, double.NaN }, new double[] { double.NaN }, DisplayName = "Desviación sin signo o Absoluta incalculable por contener NaN")]
+        [DataRow(new double[] { }, new double[] { double.NaN }, DisplayName = "Desviación sin signo o Absoluta sin datos de entrada")]
+        [DataRow(null, new double[] { double.NaN }, DisplayName = "Desviación sin signo o Absoluta con datos de entrada nulos")]
         public void CalculaLaDesviaciónSinSignoOAbsoluta(double[] datos, double[] previsto)
         {
             double[] resultado = estadistica.DesviacionSinSingoOAbsoluta(datos);
@@ -279,6 +302,8 @@ namespace VYP_OscaryMarcos
         [DataTestMethod]
         [DataRow(new double[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 5.0, 3.0, 5.0, 5.0, 6.0, 4.0, 3.0, 2.0, 4.0, 5.0, 7.0, 8.0, 4.0, 5.0, 5.0, 4.0, 12.0, 12.0, 12.0, 31.0, 5.0, 3.0, 26.0, 3.0, 748.0, 4.0, 63.0, 2.0, 1.0, 41.0, 5.0, 26.0, 3.0 }, 39.53, DisplayName = "Desviacion media con signo correcta")]
         [DataRow(new double[] { 1.0, 2.0, 3.0, double.NaN }, double.NaN, DisplayName = "Desviación media con signo incalculable por contener NaN")]
+        [DataRow(new double[] { }, double.NaN, DisplayName = "Desviación media con signo sin datos de entrada")]
+        [DataRow(null, double.NaN, DisplayName = "Desviación media con signo con datos de entrada nulos")]
         public void CalculaLaDesviaciónMediaConSigno(double[] datos, double previsto)
         {
             Assert.AreEqual(previsto, Math.Round(estadistica.DesviacionMediaConSigno(datos),2));

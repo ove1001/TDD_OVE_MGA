@@ -11,11 +11,12 @@ namespace UBUClases
 
         public double MediaAritmetica(double[] datos)
         {
-            double resultado = 0;
+            double resultado = double.NaN;
             if (datos != null)
             {
                 if (datos.Length > 0)
                 {
+                    resultado = 0;
                     foreach (double elemento in datos)
                     {
                         if (elemento.Equals(double.NaN))
@@ -29,14 +30,12 @@ namespace UBUClases
                     resultado /= datos.Length;
                 }
             }
-            else
-                resultado = double.NaN;
             return resultado;
         }
 
         public double MediaGeometrica(double[] datos)
         {
-            double resultado = 0;
+            double resultado = double.NaN;
             if (datos != null)
             {
                 if (datos.Length > 0)
@@ -55,18 +54,17 @@ namespace UBUClases
                     resultado = (double)Math.Pow(resultado, 1.0 / datos.Length);
                 }
             }
-            else
-                resultado = double.NaN;
             return resultado;
         }
 
         public double MediaArmonica(double[] datos)
         {
-            double resultado = 0;
+            double resultado = double.NaN;
             if (datos != null)
             {
                 if (datos.Length > 0)
                 {
+                    resultado = 0;
                     foreach (double elemento in datos)
                     {
                         if (elemento.Equals(double.NaN))
@@ -80,8 +78,6 @@ namespace UBUClases
                     resultado = datos.Length / resultado;
                 }
             }
-            else
-                resultado = double.NaN;
             return resultado;
         }
 
@@ -189,12 +185,13 @@ namespace UBUClases
 
         public double DesviacionMediaConSigno(double[] datos)
         {
-            double resultado = 0;
+            double resultado = double.NaN;
             double media = MediaAritmetica(datos);
             if (datos != null && !media.Equals(double.NaN))
             {
                 if (datos.Length > 0)
                 {
+                    resultado = 0;
                     foreach (double elemento in datos)
                     {
                         resultado += Math.Abs(elemento - media);
@@ -202,8 +199,6 @@ namespace UBUClases
                     resultado /= datos.Length;
                 }
             }
-            else
-                resultado = double.NaN;
             return resultado;
         }
     }

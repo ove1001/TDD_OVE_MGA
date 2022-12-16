@@ -37,7 +37,7 @@ namespace UBUClases
             string patron = usuario + host + dominio;
             if (Regex.IsMatch(eMail, patron))
             {
-                string path_archivo = ".\\dominios_internet.csv";
+                string path_archivo = "..\\..\\..\\..\\UBUClases\\dominios_internet.csv";
                 System.IO.StreamReader archivo = new System.IO.StreamReader(path_archivo);
                 string separador = ",";
                 string linea;
@@ -111,7 +111,6 @@ namespace UBUClases
         public int EsTarjetaCredito(string tarjeta_credito)
         {
             int resultado = -1;
-            Console.WriteLine(tarjeta_credito);
             string patron_tarjeta = "^" + "[0-9]{4}[- ]?[0-9]{4}[- ]?[0-9]{4}[- ]?[0-9]{1,4}" + "$";
             if (Regex.IsMatch(tarjeta_credito, patron_tarjeta))
             {
@@ -130,25 +129,19 @@ namespace UBUClases
                 if (flag_mastercard_nueva || Regex.IsMatch(tarjeta, mastercard) || Regex.IsMatch(tarjeta, visa))
                 {
                     int calculo = 0;
-                    string cuenta = tarjeta.Substring(6);
-                    Console.WriteLine(cuenta + " ");
+                    string cuenta = tarjeta.Substring(0);
                     for (int i = cuenta.Length-2; i >= 0; i--)
                     {
                         int digito = int.Parse(cuenta.Substring(i, 1));
-                        Console.Write(digito + " ");
-                        if(i%2 == 1)
+                        if(i%2 == 0)
                             digito *= 2;
-                        Console.Write(digito + " ");
                         if (digito > 9)
                             digito = digito - 10 + 1;
-                        Console.Write(digito + " ");
                         calculo += digito;
-                        Console.Write(calculo);
-                        Console.WriteLine();
                     }
                     calculo *= 9;
-                    Console.WriteLine(calculo);
                     int digito_control = int.Parse(cuenta.Substring(cuenta.Length - 1, 1));
+                    Console.WriteLine(calculo % 10);
                     if (calculo % 10 == digito_control)
                         resultado = 0;
                 }
